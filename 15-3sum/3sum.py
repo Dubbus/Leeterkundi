@@ -1,27 +1,48 @@
+'''
+nums = [-1,0,1,2,-1,-4]
+sorted nums:
+ [-4,-1,-1,0,1,2]
+ l = 0 
+ k = -4 
+
+'''
+
+
+
+
+
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        res = [] 
-        nums.sort()
+        result = [] 
+        #sort the array to apply two pointers
+        nums.sort() 
 
-        for i, a in enumerate(nums): 
-            if i > 0 and a == nums[i-1]:
+        for i,k in enumerate(nums):
+            # k automatically updates 
+            if i > 0 and k == nums[i-1]:
                 continue
-        
+            
             l = i + 1 
-            r = len(nums) - 1 
+            r = len(nums) - 1
 
             while l < r: 
-                threeSum = a + nums[l] + nums[r]
-                if threeSum > 0:
+                sum = nums[l] + nums[r] + k
+                if sum > 0: 
                     r -= 1
-                elif threeSum < 0:
+                elif sum < 0: 
                     l += 1
-                elif threeSum == 0: 
-                    res.append([a, nums[l], nums[r]])
-                    l += 1
+                else: 
+                    result.append([k, nums[l], nums[r]])
+                    l += 1 
                     r -= 1 
-                    while l < r and nums[l] == nums[l - 1]:
+                    while l < r and nums[l] == nums[l-1]:
                         l += 1 
-                    while r > l and nums[r] == nums[r + 1]:
-                        r -= 1
-        return res
+                    while l < r and nums[r] == nums[r + 1]:
+                        r -= 1 
+
+                    
+        return result
+            
+
+
+            
